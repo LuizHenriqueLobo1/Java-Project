@@ -20,8 +20,7 @@ public class Cadastrar {
 				}
 				
 				case 2: {
-					System.out.println(arrayPessoas);
-					System.out.println(arrayPessoas.size());
+					listar(arrayPessoas);
 					break;
 				}
 				
@@ -63,19 +62,30 @@ public class Cadastrar {
 	public static void cadastrar(ArrayList<Pessoa> arrayPessoas) {
 		
 		Pessoa novaPessoa = new Pessoa();
+		int numPessoa = arrayPessoas.size() + 1;
 		
-		System.out.println("CADASTRANDO PESSOA " + (arrayPessoas.size() + 1));
+		System.out.println("CADASTRANDO PESSOA " + numPessoa);
 		
-		System.out.print("Digite o nome -> ");
+		System.out.print("Digite o nome  : ");
 		novaPessoa.setNome(Globals.input.nextLine());
 		
-		System.out.print("Digite a idade -> ");
+		System.out.print("Digite a idade : ");
 		novaPessoa.setIdade(Globals.input.nextInt());
 		
-		System.out.print("Digite o sexo -> ");
+		System.out.print("Digite o sexo  : ");
 		novaPessoa.setSexo(Globals.input.next().charAt(0));
 		
 		arrayPessoas.add(novaPessoa);
+		
+		System.out.println("PESSOA " + numPessoa + " CADASTRADA");
+	}
+	
+	public static void listar(ArrayList<Pessoa> arrayPessoas) {
+		for(int i = 0; i < arrayPessoas.size(); i++) {
+			System.out.println("----- PESSOA " + (i + 1) + " -----");
+			arrayPessoas.get(i).status();
+			System.out.println("--------------------");
+		}
 	}
 	
 }

@@ -21,21 +21,21 @@ public class Pessoa {
 	
 	// Setters
 	public void setNome(String nome) {
-		nome = this.nome;
+		this.nome = nome;
 	}
 	
 	public void setIdade(int idade) {
-		idade = this.idade;
+		this.idade = idade;
 	}
 	
 	public void setSexo(char sexo) {
-		sexo = this.sexo;
+		this.sexo = sexo;
 	}
 	
 	// Meus métodos
 	public void status() {
-		System.out.println("Nome  : " + getNome());
-		System.out.println("Idade : " + getIdade());
-		System.out.println("Sexo  : " + getSexo());
+		System.out.println("NOME  : " + getNome());
+		System.out.println("IDADE : " + getIdade());
+		System.out.println("SEXO  : " + getSexo());
 	}
 }
