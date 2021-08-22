@@ -25,7 +25,7 @@ public class Cadastrar {
 				}
 				
 				case 3: {
-					System.out.println("# AINDA NAO IMPLEMENTADO #");
+					alterar(arrayPessoas);
 					break;
 				}
 				
@@ -64,7 +64,23 @@ public class Cadastrar {
 		System.out.println("5. SAIR");
 		System.out.println("--------------");
 		System.out.print("> ");
+		opcao = Globals.input.nextInt();
+		Globals.input.nextLine();
 		
+		return opcao;
+	}
+	
+	public static int menuAlterar() {
+		
+		int opcao = 0;
+	
+		System.out.println("---ALTERAR---");
+		System.out.println("1. NOME");
+		System.out.println("2. IDADE");
+		System.out.println("3. SEXO");
+		System.out.println("4. SAIR");
+		System.out.println("-------------");
+		System.out.print("> ");
 		opcao = Globals.input.nextInt();
 		Globals.input.nextLine();
 		
@@ -97,6 +113,55 @@ public class Cadastrar {
 			System.out.println("----- PESSOA " + (i + 1) + " -----");
 			arrayPessoas.get(i).status();
 			System.out.println("--------------------");
+		}
+	}
+	
+	public static void alterar(ArrayList<Pessoa> arrayPessoas) {
+		
+		int numPessoa = 0;
+		boolean loop = true;
+		int opcao = 0;
+		
+		System.out.print("NUM PESSOA A SER ALTERADA : ");
+		numPessoa = Globals.input.nextInt();
+		Globals.input.nextLine();
+	
+		while(loop) {
+			opcao = menuAlterar();
+			switch(opcao) {
+				case 1: {
+					System.out.print("Digite o novo nome: ");
+					arrayPessoas.get(numPessoa - 1).setNome(Globals.input.nextLine());
+					loop = false;
+					break;
+				}
+				
+				case 2: {
+					System.out.print("Digite a nova idade: ");
+					arrayPessoas.get(numPessoa - 1).setIdade(Globals.input.nextInt());
+					Globals.input.nextLine();
+					loop = false;
+					break;
+				}
+				
+				case 3: {
+					System.out.print("Digite a novo sexo: ");
+					arrayPessoas.get(numPessoa - 1).setSexo(Globals.input.nextLine().charAt(0));
+					loop = false;
+					break;
+				}
+				
+				case 4: {
+					System.out.print("# VOLTANDO AO MENU #");
+					loop = false;
+					break;
+				}
+				
+				default: {
+					System.out.println("# OPCAO INVALIDA #");
+					break;
+				}
+			}
 		}
 	}
 	
