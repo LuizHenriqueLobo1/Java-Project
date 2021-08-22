@@ -25,6 +25,16 @@ public class Cadastrar {
 				}
 				
 				case 3: {
+					System.out.println("# AINDA NAO IMPLEMENTADO #");
+					break;
+				}
+				
+				case 4: {
+					deletar(arrayPessoas);
+					break;
+				}
+				
+				case 5: {
 					System.out.println("# PROGRAMA ENCERRADO #");
 					loop = false;
 					break;
@@ -49,7 +59,9 @@ public class Cadastrar {
 		System.out.println("-----MENU-----");
 		System.out.println("1. CADASTRAR");
 		System.out.println("2. LISTAR");
-		System.out.println("3. SAIR");
+		System.out.println("3. ALTERAR");
+		System.out.println("4. DELETAR");
+		System.out.println("5. SAIR");
 		System.out.println("--------------");
 		System.out.print("> ");
 		
@@ -86,6 +98,18 @@ public class Cadastrar {
 			arrayPessoas.get(i).status();
 			System.out.println("--------------------");
 		}
+	}
+	
+	public static void deletar(ArrayList<Pessoa> arrayPessoas) {
+		
+		int numPessoa = 0;
+		
+		System.out.print("NUM PESSOA A SER DELETADA : ");
+		numPessoa = Globals.input.nextInt();
+		Globals.input.nextLine();
+		
+		arrayPessoas.remove(numPessoa - 1);
+		System.out.println("PESSOA " + numPessoa + " DELETADA");
 	}
 	
 }
