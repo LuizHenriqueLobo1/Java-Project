@@ -20,17 +20,26 @@ public class Cadastrar {
 				}
 				
 				case 2: {
-					listar(arrayPessoas);
+					if(Verificacoes.listaVazia(arrayPessoas))
+						System.out.println("# LISTA VAZIA #");
+					else
+						listar(arrayPessoas);
 					break;
 				}
 				
 				case 3: {
-					alterar(arrayPessoas);
+					if(Verificacoes.listaVazia(arrayPessoas))
+						System.out.println("# LISTA VAZIA #");
+					else
+						alterar(arrayPessoas);
 					break;
 				}
 				
 				case 4: {
-					deletar(arrayPessoas);
+					if(Verificacoes.listaVazia(arrayPessoas))
+						System.out.println("# LISTA VAZIA #");
+					else
+						deletar(arrayPessoas);
 					break;
 				}
 				
@@ -92,7 +101,7 @@ public class Cadastrar {
 		Pessoa novaPessoa = new Pessoa();
 		int numPessoa = arrayPessoas.size() + 1;
 		
-		System.out.println("CADASTRANDO PESSOA " + numPessoa);
+		System.out.println("# CADASTRANDO PESSOA " + numPessoa + " #");
 		
 		System.out.print("Digite o nome  : ");
 		novaPessoa.setNome(Globals.input.nextLine());
@@ -105,7 +114,7 @@ public class Cadastrar {
 		
 		arrayPessoas.add(novaPessoa);
 		
-		System.out.println("PESSOA " + numPessoa + " CADASTRADA");
+		System.out.println("# PESSOA " + numPessoa + " CADASTRADA #");
 	}
 	
 	public static void listar(ArrayList<Pessoa> arrayPessoas) {
@@ -152,7 +161,7 @@ public class Cadastrar {
 				}
 				
 				case 4: {
-					System.out.print("# VOLTANDO AO MENU #");
+					System.out.println("# VOLTANDO AO MENU #");
 					loop = false;
 					break;
 				}
