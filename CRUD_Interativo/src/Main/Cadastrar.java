@@ -103,14 +103,20 @@ public class Cadastrar {
 		
 		System.out.println("# CADASTRANDO PESSOA " + numPessoa + " #");
 		
-		System.out.print("Digite o nome  : ");
-		novaPessoa.setNome(Globals.input.nextLine());
+		do {
+			System.out.print("Digite o nome  : ");
+			novaPessoa.setNome(Globals.input.nextLine());
+		} while(!Verificacoes.nomeValido(novaPessoa.nome));
 		
-		System.out.print("Digite a idade : ");
-		novaPessoa.setIdade(Globals.input.nextInt());
+		do {
+			System.out.print("Digite a idade : ");
+			novaPessoa.setIdade(Globals.input.nextInt());
+		} while(!Verificacoes.idadeValida(novaPessoa.idade));
 		
-		System.out.print("Digite o sexo  : ");
-		novaPessoa.setSexo(Globals.input.next().charAt(0));
+		do {
+			System.out.print("Digite o sexo  : ");
+			novaPessoa.setSexo(Character.toUpperCase(Globals.input.next().charAt(0)));
+		} while(!Verificacoes.sexoValido(novaPessoa.sexo));
 		
 		arrayPessoas.add(novaPessoa);
 		
