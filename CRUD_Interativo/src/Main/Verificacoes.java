@@ -40,4 +40,13 @@ public class Verificacoes {
 		return verificacao;
 	}
 	
+	public static boolean indexValido(int index, ArrayList<Pessoa> arrayPessoas) {
+		boolean verificacao = false;
+		for(int i = 0 ; i < arrayPessoas.size(); i++) {
+			if(index == i)
+				verificacao = true;
+		}
+		return verificacao;
+	}
+	
 }

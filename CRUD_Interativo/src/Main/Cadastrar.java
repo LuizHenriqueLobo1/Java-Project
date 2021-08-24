@@ -190,9 +190,11 @@ public class Cadastrar {
 		
 		int numPessoa = 0;
 		
-		System.out.print("NUM PESSOA A SER DELETADA : ");
-		numPessoa = Globals.input.nextInt();
-		Globals.input.nextLine();
+		do {
+			System.out.print("NUM PESSOA A SER DELETADA : ");
+			numPessoa = Globals.input.nextInt();
+			Globals.input.nextLine();
+		} while(!Verificacoes.indexValido((numPessoa - 1), arrayPessoas));
 		
 		arrayPessoas.remove(numPessoa - 1);
 		System.out.println("# PESSOA " + numPessoa + " DELETADA #");
