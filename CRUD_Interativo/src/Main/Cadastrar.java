@@ -145,23 +145,29 @@ public class Cadastrar {
 			opcao = menuAlterar();
 			switch(opcao) {
 				case 1: {
-					System.out.print("Digite o novo nome: ");
-					arrayPessoas.get(numPessoa - 1).setNome(Globals.input.nextLine());
+					do {
+						System.out.print("Digite o novo nome: ");
+						arrayPessoas.get(numPessoa - 1).setNome(Globals.input.nextLine());
+					} while(!Verificacoes.nomeValido(arrayPessoas.get(numPessoa - 1).nome));
 					loop = false;
 					break;
 				}
 				
 				case 2: {
-					System.out.print("Digite a nova idade: ");
-					arrayPessoas.get(numPessoa - 1).setIdade(Globals.input.nextInt());
-					Globals.input.nextLine();
+					do {
+						System.out.print("Digite a nova idade: ");
+						arrayPessoas.get(numPessoa - 1).setIdade(Globals.input.nextInt());
+						Globals.input.nextLine();
+					} while(!Verificacoes.idadeValida(arrayPessoas.get(numPessoa - 1).idade));
 					loop = false;
 					break;
 				}
 				
 				case 3: {
-					System.out.print("Digite a novo sexo: ");
-					arrayPessoas.get(numPessoa - 1).setSexo(Globals.input.nextLine().charAt(0));
+					do {
+						System.out.print("Digite a novo sexo: ");
+						arrayPessoas.get(numPessoa - 1).setSexo(Character.toUpperCase(Globals.input.nextLine().charAt(0)));
+					} while(!Verificacoes.sexoValido(arrayPessoas.get(numPessoa - 1).sexo));
 					loop = false;
 					break;
 				}
@@ -189,7 +195,7 @@ public class Cadastrar {
 		Globals.input.nextLine();
 		
 		arrayPessoas.remove(numPessoa - 1);
-		System.out.println("PESSOA " + numPessoa + " DELETADA");
+		System.out.println("# PESSOA " + numPessoa + " DELETADA #");
 	}
 	
 }
