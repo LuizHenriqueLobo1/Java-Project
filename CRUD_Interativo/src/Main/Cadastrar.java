@@ -155,6 +155,41 @@ public class Cadastrar {
 	
 	public static void deletar(ArrayList<Pessoa> arrayPessoas) {
 		
+		boolean loop = true;
+		int opcao = 0;
+		
+		while(loop) {
+			opcao = Menu.deletar();
+			switch(opcao) {
+				case 1: {
+					deletarApenasUm(arrayPessoas);
+					loop = false;
+					break;
+				}
+				
+				case 2: {
+					System.out.println("# AINDA NAO IMPLEMENTADO #");
+					loop = false;
+					break;
+				}
+				
+				case 3: {
+					System.out.println("# VOLTANDO AO MENU #");
+					loop = false;
+					break;
+				}
+				
+				default: {
+					System.out.println("# OPCAO INVALIDA #");
+					break;
+				}
+			}
+		}
+		
+	}
+	
+	public static void deletarApenasUm(ArrayList<Pessoa> arrayPessoas) {
+		
 		int numPessoa = 0;
 		
 		do {

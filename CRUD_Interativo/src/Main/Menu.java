@@ -39,4 +39,20 @@ public static int principal() {
 		return opcao;
 	}
 	
+	public static int deletar() {
+		
+		int opcao = 0;
+		
+		System.out.println("---DELETAR---");
+		System.out.println("1. APENAS UM");
+		System.out.println("2. TODOS");
+		System.out.println("3. SAIR");
+		System.out.println("-------------");
+		System.out.print("> ");
+		opcao = Globals.input.nextInt();
+		Globals.input.nextLine();
+		
+		return opcao;
+	}
+	
 }
