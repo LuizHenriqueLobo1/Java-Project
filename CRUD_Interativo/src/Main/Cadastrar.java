@@ -168,7 +168,7 @@ public class Cadastrar {
 				}
 				
 				case 2: {
-					System.out.println("# AINDA NAO IMPLEMENTADO #");
+					deletarTodos(arrayPessoas);
 					loop = false;
 					break;
 				}
@@ -200,6 +200,11 @@ public class Cadastrar {
 		
 		arrayPessoas.remove(numPessoa - 1);
 		System.out.println("# PESSOA " + numPessoa + " DELETADA #");
+	}
+	
+	public static void deletarTodos(ArrayList<Pessoa> arrayPessoas) {
+		arrayPessoas.clear();
+		System.out.println("# TODAS PESSOAS DELETADAS #");
 	}
 	
 }
