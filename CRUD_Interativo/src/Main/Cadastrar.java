@@ -89,10 +89,58 @@ public class Cadastrar {
 	}
 	
 	public static void listar(ArrayList<Pessoa> arrayPessoas) {
+		
+		boolean loop = true;
+		int opcao = 0;
+		
+		while(loop) {
+			opcao = Menu.listar();
+			switch(opcao) {
+				case 1: {
+					listarPadrao(arrayPessoas);
+					break;
+				}
+				
+				case 2: {
+					listarPorSexo(arrayPessoas, 'M');
+					break;
+				}
+				
+				case 3: {
+					listarPorSexo(arrayPessoas, 'F');
+					break;
+				}
+				
+				case 4: {
+					System.out.println("# VOLTANDO AO MENU #");
+					loop = false;
+					break;
+				}
+				
+				default: {
+					System.out.println("# OPCAO INVALIDA #");
+					break;
+				}
+			}
+		}
+		
+	}
+	
+	public static void listarPadrao(ArrayList<Pessoa> arrayPessoas) {
 		for(int i = 0; i < arrayPessoas.size(); i++) {
 			System.out.println("----- PESSOA " + (i + 1) + " -----");
 			arrayPessoas.get(i).status();
 			System.out.println("--------------------");
+		}
+	}
+	
+	public static void listarPorSexo(ArrayList<Pessoa> arrayPessoas, char sexo) { 
+		for(int i = 0; i < arrayPessoas.size(); i++) {
+			if(arrayPessoas.get(i).getSexo() == sexo) {
+				System.out.println("----- PESSOA " + (i + 1) + " -----");
+				arrayPessoas.get(i).status();
+				System.out.println("--------------------");
+			}
 		}
 	}
 	
@@ -163,7 +211,6 @@ public class Cadastrar {
 			switch(opcao) {
 				case 1: {
 					deletarApenasUm(arrayPessoas);
-					loop = false;
 					break;
 				}
 				

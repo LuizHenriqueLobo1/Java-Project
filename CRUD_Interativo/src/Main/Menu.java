@@ -4,7 +4,7 @@ import Main.Cadastrar.Globals;
 
 public class Menu {
 
-public static int principal() {
+	public static int principal() {
 		
 		int opcao = 0;
 		
@@ -14,6 +14,23 @@ public static int principal() {
 		System.out.println("3. ALTERAR");
 		System.out.println("4. DELETAR");
 		System.out.println("5. SAIR");
+		System.out.println("--------------");
+		System.out.print("> ");
+		opcao = Globals.input.nextInt();
+		Globals.input.nextLine();
+		
+		return opcao;
+	}
+	
+	public static int listar() {
+		
+		int opcao = 0;
+		
+		System.out.println("----LISTAR----");
+		System.out.println("1. PADRAO");
+		System.out.println("2. MASCULINO");
+		System.out.println("3. FEMININO");
+		System.out.println("4. SAIR");
 		System.out.println("--------------");
 		System.out.print("> ");
 		opcao = Globals.input.nextInt();
