@@ -112,6 +112,16 @@ public class Cadastrar {
 				}
 				
 				case 4: {
+					listarPorIdade(arrayPessoas, '>');
+					break;
+				}
+				
+				case 5: {
+					listarPorIdade(arrayPessoas, '<');
+					break;
+				}
+				
+				case 6: {
 					System.out.println("# VOLTANDO AO MENU #");
 					loop = false;
 					break;
@@ -140,6 +150,24 @@ public class Cadastrar {
 				System.out.println("----- PESSOA " + (i + 1) + " -----");
 				arrayPessoas.get(i).status();
 				System.out.println("--------------------");
+			}
+		}
+	}
+	
+	public static void listarPorIdade(ArrayList<Pessoa> arrayPessoas, char param) {
+		for(int i = 0; i < arrayPessoas.size(); i++) {
+			if(param == '>') {
+				if(arrayPessoas.get(i).getIdade() >= 18) {
+					System.out.println("----- PESSOA " + (i + 1) + " -----");
+					arrayPessoas.get(i).status();
+					System.out.println("--------------------");	
+				}
+			} else {
+				if(arrayPessoas.get(i).getIdade() < 18) {
+					System.out.println("----- PESSOA " + (i + 1) + " -----");
+					arrayPessoas.get(i).status();
+					System.out.println("--------------------");	
+				}
 			}
 		}
 	}

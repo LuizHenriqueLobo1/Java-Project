@@ -30,7 +30,9 @@ public class Menu {
 		System.out.println("1. PADRAO");
 		System.out.println("2. MASCULINO");
 		System.out.println("3. FEMININO");
-		System.out.println("4. SAIR");
+		System.out.println("4. MAIOR IDADE");
+		System.out.println("5. MENOR IDADE");
+		System.out.println("6. SAIR");
 		System.out.println("--------------");
 		System.out.print("> ");
 		opcao = Globals.input.nextInt();
