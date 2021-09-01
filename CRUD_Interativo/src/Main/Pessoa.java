@@ -38,4 +38,5 @@ public class Pessoa {
 		System.out.println("IDADE : " + getIdade());
 		System.out.println("SEXO  : " + getSexo());
 	}
+	
 }

@@ -1,6 +1,6 @@
 package Main;
 
-import Main.Cadastrar.Globals;
+import Main.Lista.Globals;
 
 public class Menu {
 
@@ -13,7 +13,8 @@ public class Menu {
 		System.out.println("2. LISTAR");
 		System.out.println("3. ALTERAR");
 		System.out.println("4. DELETAR");
-		System.out.println("5. SAIR");
+		System.out.println("5. OUTROS");
+		System.out.println("6. SAIR");
 		System.out.println("--------------");
 		System.out.print("> ");
 		opcao = Globals.input.nextInt();
@@ -67,6 +68,21 @@ public class Menu {
 		System.out.println("2. TODOS");
 		System.out.println("3. SAIR");
 		System.out.println("-------------");
+		System.out.print("> ");
+		opcao = Globals.input.nextInt();
+		Globals.input.nextLine();
+		
+		return opcao;
+	}
+	
+	public static int outros() {
+		
+		int opcao = 0;
+		
+		System.out.println("------OUTROS------");
+		System.out.println("1. MEDIA IDADES");
+		System.out.println("2. SAIR");
+		System.out.println("------------------");
 		System.out.print("> ");
 		opcao = Globals.input.nextInt();
 		Globals.input.nextLine();
