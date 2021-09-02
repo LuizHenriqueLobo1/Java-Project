@@ -323,7 +323,9 @@ public class Lista {
 		for(int i = 0; i < arrayPessoas.size(); i++) {
 			soma += arrayPessoas.get(i).getIdade();
 		}
+		System.out.println("---------------------");
 		System.out.println("MEDIA DAS IDADES: " + (soma / arrayPessoas.size()));
+		System.out.println("---------------------");
 	}
 	
 }
