@@ -1,6 +1,7 @@
-package ex8_9_10;
+package ex8_9_10_11_12;
 
 import java.util.Calendar;
+import java.util.Scanner;
 
 public class MusicStore {
 
@@ -8,7 +9,14 @@ public class MusicStore {
 	int openTime  =  9;
 	int closeTime = 21;
 	
+	MusicTitle[] titles = new MusicTitle[5];
+	
 	public void displayHoursOfOperation() {
+		Scanner input = new Scanner(System.in);
+		
+		setOpenTime(input.nextInt());
+		setCloseTime(input.nextInt());
+		
 		System.out.println("Diariamente das " + getOpenTime() + " - " + getCloseTime());
 	}
 	
@@ -49,6 +57,20 @@ public class MusicStore {
 			System.out.println("Estamos abertos!");
 		else
 			System.out.println("Estamos fechados!");
+	}
+	
+	public void myToString() {
+		System.out.println("[Dono = " + this.owner + ", Abre = " + getOpenTime() + ", Fecha = " + getCloseTime() + "]");
+	}
+	
+	public void displayMusicTitles() {
+		for(int i = 0; i < this.titles.length; i++) {
+			if(this.titles[i] != null) {
+				System.out.println("Título " + (i + 1) + ":");
+				System.out.println("Título : " + this.titles[i].getTitle());
+				System.out.println("Artista: " + this.titles[i].getArtist());
+			}
+		}
 	}
 	
 }
