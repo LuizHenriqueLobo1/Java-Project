@@ -31,4 +31,16 @@ public class Circulo extends FormaGeometrica {
 		this.raio = raio;
 	}
 	
+	private float calculaArea() {
+		float area = 3.14f * (getRaio() * 2);
+		return area;
+	}
+	
+	public void status() {
+		System.out.println("Círculo");
+		System.out.println("Centro: " + getCentro());
+		System.out.println("Raio: " + getRaio());
+		System.out.println("Área: " + calculaArea());
+	}
+	
 }
