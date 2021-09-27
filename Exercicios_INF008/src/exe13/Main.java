@@ -7,10 +7,11 @@ public class Main {
 		Bank bank = new Bank();
 		
 		for(int i = 0; i < bank.clients.length; i++) {
-			bank.clients[i] = new Client();
-			bank.clients[i].setNumber(i+1);
-			bank.clients[i].setBalance(100);
-			bank.clients[i].setType("poupança");
+			Client client = new Client();
+			client.setNumber(i+1);
+			client.setBalance(100);
+			client.setType("poupança");
+			bank.addClient(client);
 		}
 		
 		bank.clients[3].setType("corrente");
