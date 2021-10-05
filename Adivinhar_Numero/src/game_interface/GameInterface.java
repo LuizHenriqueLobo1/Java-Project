@@ -19,11 +19,11 @@ public class GameInterface {
 	private JButton btnPlay;
 	private JLabel lblStatus;
 	private JLabel lblResult;
-	
-	private GameLogic game = new GameLogic();
 	private JLabel lblCount;
 	private JLabel lblAttempments;
 
+	private GameLogic game = new GameLogic();
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -54,7 +54,7 @@ public class GameInterface {
 		
 		textField = new JTextField();
 		textField.setEnabled(false);
-		textField.setBounds(137, 47, 106, 20);
+		textField.setBounds(146, 47, 97, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
@@ -94,16 +94,16 @@ public class GameInterface {
 		lblStatus.setBounds(10, 184, 46, 14);
 		frame.getContentPane().add(lblStatus);
 		
-		lblResult = new JLabel("O jogo começou, faça sua jogada.");
+		lblResult = new JLabel("Clique em (Iniciar) para começar!");
 		lblResult.setBounds(54, 184, 245, 14);
 		frame.getContentPane().add(lblResult);
 		
 		lblCount = new JLabel("0");
-		lblCount.setBounds(81, 220, 35, 14);
+		lblCount.setBounds(78, 220, 35, 14);
 		frame.getContentPane().add(lblCount);
 		
-		lblAttempments = new JLabel("Tentativas:");
-		lblAttempments.setBounds(10, 220, 75, 14);
+		lblAttempments = new JLabel("Tentativas: ");
+		lblAttempments.setBounds(10, 220, 70, 14);
 		frame.getContentPane().add(lblAttempments);
 	}
 	
