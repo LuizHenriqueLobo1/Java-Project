@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
@@ -52,8 +53,6 @@ public class GameInterface {
 		tabbedPane.setBounds(0, 0, 684, 486);
 		frame.getContentPane().add(tabbedPane);
 		
-		ButtonGroup buttonGroup = new ButtonGroup();
-		
 		JPanel theme = new JPanel();
 		tabbedPane.addTab("Temas", null, theme, null);
 		theme.setLayout(null);
@@ -76,6 +75,8 @@ public class GameInterface {
 		rdbtnFruits.setBounds(10, 100, 91, 14);
 		rdbtnFruits.setActionCommand("3");
 		theme.add(rdbtnFruits);
+		
+		ButtonGroup buttonGroup = new ButtonGroup();
 		buttonGroup.add(rdbtnMovies);
 		buttonGroup.add(rdbtnAnimals);
 		buttonGroup.add(rdbtnFruits);
@@ -86,56 +87,80 @@ public class GameInterface {
 		game.setLayout(null);
 		
 		JLabel lblLetters = new JLabel("Número de letras: ");
-		lblLetters.setBounds(10, 173, 108, 14);
+		lblLetters.setBounds(10, 253, 108, 14);
 		game.add(lblLetters);
 		
 		JLabel lblNumberOfLetters = new JLabel("0");
-		lblNumberOfLetters.setBounds(115, 173, 32, 14);
+		lblNumberOfLetters.setBounds(115, 253, 32, 14);
 		game.add(lblNumberOfLetters);
 		
-		JLabel lblWord = new JLabel("Palavra");
+		JLabel lblWord = new JLabel("*Resposta*");
 		lblWord.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblWord.setBounds(10, 198, 200, 38);
+		lblWord.setBounds(10, 278, 200, 38);
 		game.add(lblWord);
 		
 		JTextField textLetter = new JTextField();
-		textLetter.setBounds(45, 262, 68, 20);
+		textLetter.setBounds(50, 336, 68, 20);
 		game.add(textLetter);
 		textLetter.setColumns(10);
 		
 		JLabel lblLetter = new JLabel("Letra:");
-		lblLetter.setBounds(10, 265, 42, 14);
+		lblLetter.setBounds(10, 339, 42, 14);
 		game.add(lblLetter);
 		
 		JLabel lblSteps = new JLabel("Quantidade de jogadas:");
-		lblSteps.setBounds(10, 379, 133, 14);
+		lblSteps.setBounds(10, 420, 133, 14);
 		game.add(lblSteps);
 		
 		JLabel lblCountSteps = new JLabel("0");
-		lblCountSteps.setBounds(149, 379, 46, 14);
+		lblCountSteps.setBounds(149, 420, 46, 14);
 		game.add(lblCountSteps);
 		
+		JLabel lblChosenTheme = new JLabel("Tema:");
+		lblChosenTheme.setBounds(10, 223, 46, 14);
+		game.add(lblChosenTheme);
+		
+		JLabel lblTheme = new JLabel("*Tema*");
+		lblTheme.setBounds(50, 223, 97, 14);
+		game.add(lblTheme);
+		
+		JLabel lblStatusGame = new JLabel("*Status*");
+		lblStatusGame.setBounds(230, 11, 439, 14);
+		game.add(lblStatusGame);
+		
+		JLabel lblImage = new JLabel("*Imagem*");
+		lblImage.setBounds(10, 11, 200, 201);
+		game.add(lblImage);
+		
 		JButton btnStart = new JButton("Iniciar");
+		JButton btnPlay = new JButton("Jogar");
+		
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Interface
 				tabbedPane.setEnabledAt(1, true);
 				tabbedPane.setEnabledAt(0, false);
 				tabbedPane.setSelectedIndex(1);
+				btnPlay.setEnabled(true);
+				lblStatusGame.setText("O jogo está rolando.");
+				lblImage.setIcon(new ImageIcon("assets\\hangman_game_frame_1.png"));
 				
+				// Set theme
 				String myTheme = buttonGroup.getSelection().getActionCommand();
+				lblTheme.setText(getNameTheme(myTheme));
 				hangman.setSelectedTheme(Integer.parseInt(myTheme));
-				hangman.setRaffledWord();
-				String word = hangman.getRaffledWord();
-				System.out.println(word);
-				hangman.setUnderlineWord();
+				
+				// Start game
+				hangman.start();
+				lblCountSteps.setText(Integer.toString(hangman.getCountSteps()));
 				lblWord.setText(hangman.getUnderlineWord());
 				lblNumberOfLetters.setText(Integer.toString(hangman.getRaffledWord().length()));
+			
 			}
 		});
 		btnStart.setBounds(10, 130, 70, 23);
 		theme.add(btnStart);
 		
-		JButton btnPlay = new JButton("Jogar");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -143,15 +168,64 @@ public class GameInterface {
 					hangman.updateUnderlineWord(Character.toString(myLetter));
 					lblWord.setText(hangman.getUnderlineWord());
 					lblCountSteps.setText(Integer.toString(hangman.getCountSteps()));
+					lblImage.setIcon(getImageFrame(hangman.getCountLife()));
+					// Win
+					if(hangman.checkWin()) {
+						lblStatusGame.setText("VOCÊ GANHOU!");
+						btnPlay.setEnabled(false);
+						tabbedPane.setEnabledAt(0, true);
+						tabbedPane.setEnabledAt(1, false);
+						textLetter.setText("");
+					}
+					// Lose
+					if(hangman.checkLose()) {
+						lblStatusGame.setText("VOCÊ PERDEU!");
+						btnPlay.setEnabled(false);
+						tabbedPane.setEnabledAt(0, true);
+						tabbedPane.setEnabledAt(1, false);
+						textLetter.setText("");
+					}
 				} catch(Exception ex) {
 					JOptionPane.showMessageDialog(null, "Insira um caractere.");
 				}
 				
 			}
 		});
-		btnPlay.setBounds(10, 314, 103, 23);
+		btnPlay.setBounds(10, 377, 103, 23);
 		game.add(btnPlay);
 		
+	}
+	
+	private String getNameTheme(String themeNumber) {
+		String theme;
+		if(Integer.parseInt(themeNumber) == 1) {
+			theme = "Filmes";
+		} else if(Integer.parseInt(themeNumber) == 2) {
+			theme = "Animais";
+		} else {
+			theme = "Frutas";
+		}
+		return theme;
+	}
+	
+	private ImageIcon getImageFrame(int countLife) {
+		ImageIcon myFrame;
+		if(countLife == 6) {
+			myFrame = new ImageIcon("assets\\hangman_game_frame_1.png");
+		} else if(countLife == 5) {
+			myFrame = new ImageIcon("assets\\hangman_game_frame_2.png");
+		} else if(countLife == 4) {
+			myFrame = new ImageIcon("assets\\hangman_game_frame_3.png");
+		} else if(countLife == 3) {
+			myFrame = new ImageIcon("assets\\hangman_game_frame_4.png");
+		} else if(countLife == 2) {
+			myFrame = new ImageIcon("assets\\hangman_game_frame_5.png");
+		} else if(countLife == 1) {
+			myFrame = new ImageIcon("assets\\hangman_game_frame_6.png");
+		} else {
+			myFrame = new ImageIcon("assets\\hangman_game_frame_7.png");
+		}
+		return myFrame;
 	}
 	
 }
