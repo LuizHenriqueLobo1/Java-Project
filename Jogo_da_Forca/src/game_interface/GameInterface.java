@@ -131,6 +131,14 @@ public class GameInterface {
 		lblImage.setBounds(10, 11, 200, 201);
 		game.add(lblImage);
 		
+		JLabel lblUsedLettersTitle = new JLabel("Letras usadas:");
+		lblUsedLettersTitle.setBounds(230, 47, 85, 14);
+		game.add(lblUsedLettersTitle);
+		
+		JLabel lblUsedLetters = new JLabel("*Letras*");
+		lblUsedLetters.setBounds(230, 72, 300, 14);
+		game.add(lblUsedLetters);
+		
 		JButton btnStart = new JButton("Iniciar");
 		JButton btnPlay = new JButton("Jogar");
 		
@@ -141,7 +149,7 @@ public class GameInterface {
 				setGameTheme(buttonGroup, lblTheme);
 				// Game tab
 				hangman.start();
-				startGameInterface(lblStatusGame,lblImage, lblCountSteps, lblWord, lblNumberOfLetters);
+				startGameInterface(lblStatusGame,lblImage, lblCountSteps, lblWord, lblNumberOfLetters, lblUsedLetters);
 			}
 		});
 		btnStart.setBounds(10, 130, 70, 23);
@@ -150,7 +158,7 @@ public class GameInterface {
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					makePlay(textLetter, lblWord, lblCountSteps, lblImage);
+					makePlay(textLetter, lblWord, lblCountSteps, lblImage, lblUsedLetters);
 					updateGameStatus(lblStatusGame, btnPlay, textLetter, tabbedPane);
 				} catch(Exception ex) {
 					JOptionPane.showMessageDialog(null, "Insira um caractere.");
@@ -187,12 +195,13 @@ public class GameInterface {
 		button.setEnabled(true);
 	}
 	
-	private void startGameInterface(JLabel status, JLabel image, JLabel countSteps, JLabel word, JLabel numberOfLetters) {
+	private void startGameInterface(JLabel status, JLabel image, JLabel countSteps, JLabel word, JLabel numberOfLetters, JLabel usedLetters) {
 		status.setText("Você está jogando.");
 		image.setIcon(new ImageIcon("assets\\hangman_game_frame_1.png"));
 		countSteps.setText(Integer.toString(hangman.getCountSteps()));
 		word.setText(hangman.getUnderlineWord());
 		numberOfLetters.setText(Integer.toString(hangman.getRaffledWord().length()));
+		usedLetters.setText(hangman.getUsedLetters());
 	}
 	
 	private void resetGameInterface(JButton button, JTextField textField, JTabbedPane tabbedPane) {
@@ -202,12 +211,17 @@ public class GameInterface {
 		textField.setText("");
 	}
 	
-	private void makePlay(JTextField textField, JLabel word, JLabel countSteps, JLabel image) {
-		char myLetter = textField.getText().charAt(0);
-		hangman.updateUnderlineWord(Character.toString(myLetter));
-		word.setText(hangman.getUnderlineWord());
-		countSteps.setText(Integer.toString(hangman.getCountSteps()));
-		image.setIcon(getImageFrame(hangman.getCountLife()));
+	private void makePlay(JTextField textField, JLabel word, JLabel countSteps, JLabel image, JLabel usedLetters) {
+		char myLetter = textField.getText().toUpperCase().charAt(0);
+		if(!hangman.haveThisLetter(Character.toString(myLetter))) {
+			hangman.updateUnderlineWord(Character.toString(myLetter));
+			word.setText(hangman.getUnderlineWord());
+			countSteps.setText(Integer.toString(hangman.getCountSteps()));
+			image.setIcon(getImageFrame(hangman.getCountLife()));
+			usedLetters.setText(hangman.getUsedLetters());
+		} else {
+			JOptionPane.showMessageDialog(null, "Esta letra já foi usada!");
+		}
 	}
 	
 	private void updateGameStatus(JLabel status, JButton button, JTextField textField, JTabbedPane tabbedPane) {
@@ -239,5 +253,4 @@ public class GameInterface {
 		}
 		return myFrame;
 	}
-	
 }

@@ -7,7 +7,8 @@ public class Hangman extends Theme {
 	private int countSteps;
 	private int countLife;
 	private boolean hit;
-
+	private String usedLetters = "";
+	
 	private void setRaffledWord() {
 		this.raffledWord = this.getWord();
 	}
@@ -38,6 +39,7 @@ public class Hangman extends Theme {
 		this.underlineWord = sb.toString().toUpperCase();
 		this.updateCountSteps();
 		this.updateCountLife();
+		this.setUsedLetters(letter);
 	}
 	
 	private void setCountSteps() {
@@ -64,6 +66,24 @@ public class Hangman extends Theme {
 	
 	public int getCountLife() {
 		return this.countLife;
+	}
+	
+	private void setUsedLetters(String letter) {
+		this.usedLetters += letter;
+	}
+	
+	public String getUsedLetters() {
+		return this.usedLetters;
+	}
+	
+	public boolean haveThisLetter(String letter) {
+		boolean have = false;
+		for(int i = 0; i < this.getUsedLetters().length(); i++) {
+			if(this.getUsedLetters().charAt(i) == letter.toUpperCase().charAt(0)) {
+				have = true;
+			}
+		}
+		return have;
 	}
 	
 	public boolean checkWin() {
@@ -95,6 +115,7 @@ public class Hangman extends Theme {
 		this.raffledWord = "";
 		this.countSteps = 0;
 		this.countLife = 6;
+		this.usedLetters = "";
 	}
 	
 	public void start() {
