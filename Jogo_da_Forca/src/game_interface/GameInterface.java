@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 
 import game_logic.Hangman;
+import others.JTextFieldLimit;
 
 public class GameInterface {
 
@@ -99,6 +100,7 @@ public class GameInterface {
 		game.add(lblWord);
 		
 		JTextField textLetter = new JTextField();
+		textLetter.setDocument(new JTextFieldLimit(1));
 		textLetter.setBounds(50, 336, 68, 20);
 		game.add(textLetter);
 		textLetter.setColumns(10);
@@ -253,4 +255,5 @@ public class GameInterface {
 		}
 		return myFrame;
 	}
+	
 }
