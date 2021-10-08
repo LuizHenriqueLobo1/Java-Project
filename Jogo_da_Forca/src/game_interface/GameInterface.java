@@ -22,7 +22,8 @@ import game_logic.Hangman;
 public class GameInterface {
 
 	private JFrame frame;
-
+	private Hangman hangman = new Hangman();
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -46,8 +47,6 @@ public class GameInterface {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setTitle("Jogo da Forca");
-		
-		Hangman hangman = new Hangman();
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 684, 486);
@@ -96,7 +95,7 @@ public class GameInterface {
 		
 		JLabel lblWord = new JLabel("*Resposta*");
 		lblWord.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblWord.setBounds(10, 278, 200, 38);
+		lblWord.setBounds(10, 278, 300, 38);
 		game.add(lblWord);
 		
 		JTextField textLetter = new JTextField();
@@ -137,25 +136,12 @@ public class GameInterface {
 		
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Interface
-				tabbedPane.setEnabledAt(1, true);
-				tabbedPane.setEnabledAt(0, false);
-				tabbedPane.setSelectedIndex(1);
-				btnPlay.setEnabled(true);
-				lblStatusGame.setText("O jogo está rolando.");
-				lblImage.setIcon(new ImageIcon("assets\\hangman_game_frame_1.png"));
-				
-				// Set theme
-				String myTheme = buttonGroup.getSelection().getActionCommand();
-				lblTheme.setText(getNameTheme(myTheme));
-				hangman.setSelectedTheme(Integer.parseInt(myTheme));
-				
-				// Start game
+				// Theme tab
+				startThemeInterface(tabbedPane, btnPlay);
+				setGameTheme(buttonGroup, lblTheme);
+				// Game tab
 				hangman.start();
-				lblCountSteps.setText(Integer.toString(hangman.getCountSteps()));
-				lblWord.setText(hangman.getUnderlineWord());
-				lblNumberOfLetters.setText(Integer.toString(hangman.getRaffledWord().length()));
-			
+				startGameInterface(lblStatusGame,lblImage, lblCountSteps, lblWord, lblNumberOfLetters);
 			}
 		});
 		btnStart.setBounds(10, 130, 70, 23);
@@ -164,31 +150,11 @@ public class GameInterface {
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					char myLetter = textLetter.getText().charAt(0);
-					hangman.updateUnderlineWord(Character.toString(myLetter));
-					lblWord.setText(hangman.getUnderlineWord());
-					lblCountSteps.setText(Integer.toString(hangman.getCountSteps()));
-					lblImage.setIcon(getImageFrame(hangman.getCountLife()));
-					// Win
-					if(hangman.checkWin()) {
-						lblStatusGame.setText("VOCÊ GANHOU!");
-						btnPlay.setEnabled(false);
-						tabbedPane.setEnabledAt(0, true);
-						tabbedPane.setEnabledAt(1, false);
-						textLetter.setText("");
-					}
-					// Lose
-					if(hangman.checkLose()) {
-						lblStatusGame.setText("VOCÊ PERDEU!");
-						btnPlay.setEnabled(false);
-						tabbedPane.setEnabledAt(0, true);
-						tabbedPane.setEnabledAt(1, false);
-						textLetter.setText("");
-					}
+					makePlay(textLetter, lblWord, lblCountSteps, lblImage);
+					updateGameStatus(lblStatusGame, btnPlay, textLetter, tabbedPane);
 				} catch(Exception ex) {
 					JOptionPane.showMessageDialog(null, "Insira um caractere.");
 				}
-				
 			}
 		});
 		btnPlay.setBounds(10, 377, 103, 23);
@@ -206,6 +172,52 @@ public class GameInterface {
 			theme = "Frutas";
 		}
 		return theme;
+	}
+	
+	private void setGameTheme(ButtonGroup buttonGroup, JLabel label) {
+		String myTheme = buttonGroup.getSelection().getActionCommand();
+		label.setText(getNameTheme(myTheme));
+		hangman.setSelectedTheme(Integer.parseInt(myTheme));
+	}
+	
+	private void startThemeInterface(JTabbedPane tabbedPane, JButton button) {
+		tabbedPane.setEnabledAt(1, true);
+		tabbedPane.setEnabledAt(0, false);
+		tabbedPane.setSelectedIndex(1);
+		button.setEnabled(true);
+	}
+	
+	private void startGameInterface(JLabel status, JLabel image, JLabel countSteps, JLabel word, JLabel numberOfLetters) {
+		status.setText("Você está jogando.");
+		image.setIcon(new ImageIcon("assets\\hangman_game_frame_1.png"));
+		countSteps.setText(Integer.toString(hangman.getCountSteps()));
+		word.setText(hangman.getUnderlineWord());
+		numberOfLetters.setText(Integer.toString(hangman.getRaffledWord().length()));
+	}
+	
+	private void resetGameInterface(JButton button, JTextField textField, JTabbedPane tabbedPane) {
+		button.setEnabled(false);
+		tabbedPane.setEnabledAt(0, true);
+		tabbedPane.setEnabledAt(1, false);
+		textField.setText("");
+	}
+	
+	private void makePlay(JTextField textField, JLabel word, JLabel countSteps, JLabel image) {
+		char myLetter = textField.getText().charAt(0);
+		hangman.updateUnderlineWord(Character.toString(myLetter));
+		word.setText(hangman.getUnderlineWord());
+		countSteps.setText(Integer.toString(hangman.getCountSteps()));
+		image.setIcon(getImageFrame(hangman.getCountLife()));
+	}
+	
+	private void updateGameStatus(JLabel status, JButton button, JTextField textField, JTabbedPane tabbedPane) {
+		if(hangman.checkWin()) {
+			status.setText("VOCÊ GANHOU!");
+			resetGameInterface(button, textField, tabbedPane);
+		} else if(hangman.checkLose()) {
+			status.setText("VOCÊ PERDEU!");
+			resetGameInterface(button, textField, tabbedPane);
+		}
 	}
 	
 	private ImageIcon getImageFrame(int countLife) {
