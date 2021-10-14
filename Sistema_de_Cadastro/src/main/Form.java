@@ -8,7 +8,7 @@ public class Form {
 	
 	public void registerPeople(People people) {
 		this.peoples.add(people);
-		System.out.println("New registered people");
+		System.out.println("New people added");
 	}
 	
 	public int getNumberOfPeoples() {

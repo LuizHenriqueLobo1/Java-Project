@@ -48,6 +48,10 @@ public class Interface {
 		
 		Form form = new Form();
 		
+		JLabel lblTitle = new JLabel("Preencha o formulário:");
+		lblTitle.setBounds(10, 11, 132, 14);
+		frame.getContentPane().add(lblTitle);
+		
 		JLabel lblName = new JLabel("Nome:");
 		lblName.setBounds(10, 50, 46, 14);
 		frame.getContentPane().add(lblName);
@@ -89,6 +93,14 @@ public class Interface {
 		lblList.setBounds(10, 256, 114, 14);
 		frame.getContentPane().add(lblList);
 		
+		JLabel lblNumberOfPeoples = new JLabel("Número de Pessoas:");
+		lblNumberOfPeoples.setBounds(268, 256, 120, 14);
+		frame.getContentPane().add(lblNumberOfPeoples);
+		
+		JLabel lblCountPeoples = new JLabel("0");
+		lblCountPeoples.setBounds(394, 256, 30, 14);
+		frame.getContentPane().add(lblCountPeoples);
+		
 		JList<String> list = new JList<>();
 		list.setBounds(10, 281, 414, 219);
 		frame.getContentPane().add(list);
@@ -105,10 +117,12 @@ public class Interface {
 				people.setGender(buttonGroup.getSelection().getActionCommand().charAt(0));
 				form.registerPeople(people);
 				listModel.addElement(form.getLastPeople());
+				lblCountPeoples.setText(Integer.toString(form.getNumberOfPeoples()));
 			}
 		});
 		btnRegister.setBounds(42, 196, 100, 23);
 		frame.getContentPane().add(btnRegister);
+		
 	}
-	
+
 }
