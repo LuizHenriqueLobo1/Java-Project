@@ -43,8 +43,8 @@ public class Pessoa {
 		this.setPai(pai);
 		this.ascendentes.add(this);
 		if(this.getPai() != null) {
-			for(int i = 0; i < this.getPai().getAscendentes().size(); i++) {
-				this.ascendentes.add(this.getPai().getAscendentes().get(i));
+			for(Pessoa ascendente: this.getPai().getAscendentes()) {
+				this.ascendentes.add(ascendente);
 			}
 		}
 	}
@@ -54,9 +54,13 @@ public class Pessoa {
 		System.out.println("Nome: " + this.getNome());
 		System.out.println("Sexo: " + this.getSexo());
 		System.out.println("Ascendentes: ");
-		for(int i = 0; i < this.getAscendentes().size(); i++) {
-			System.out.println(this.getAscendentes().get(i).getNome());
+		for(Pessoa ascendentes: this.getAscendentes()) {
+			System.out.println(ascendentes);
 		}
+	}
+	
+	public String toString() {
+		return this.getNome();
 	}
 	
 }
