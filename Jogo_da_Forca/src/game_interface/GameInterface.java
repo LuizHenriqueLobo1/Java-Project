@@ -221,6 +221,7 @@ public class GameInterface {
 			countSteps.setText(Integer.toString(hangman.getCountSteps()));
 			image.setIcon(getImageFrame(hangman.getCountLife()));
 			usedLetters.setText(hangman.getUsedLetters());
+			textField.setText("");
 		} else {
 			JOptionPane.showMessageDialog(null, "Esta letra já foi usada!");
 		}

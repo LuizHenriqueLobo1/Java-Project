@@ -54,11 +54,11 @@ public class Pessoa {
 		System.out.println("Nome: " + this.getNome());
 		System.out.println("Sexo: " + this.getSexo());
 		System.out.println("Ascendentes: ");
-		for(Pessoa ascendentes: this.getAscendentes()) {
-			System.out.println(ascendentes);
+		for(Pessoa ascendente: this.getAscendentes()) {
+			System.out.println(ascendente);
 		}
 	}
-	
+
 	public String toString() {
 		return this.getNome();
 	}
