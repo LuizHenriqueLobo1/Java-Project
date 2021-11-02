@@ -16,6 +16,33 @@ public class PerfectMatrix {
 		this.heightIndex = new int[3];
 	}
 	
+	public void makeMatrix() {
+		this.initializeMatrix();
+		this.fillThreeMatrixIndexs();
+	}
+	
+	public void printMatrix() {
+		System.out.println("-----");
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
+		System.out.println("-----");
+	}
+	
+	public boolean makePlay(int heightIndex, int widthIndex, int value) {
+		boolean validMove = false;
+		if(heightIndex > 2 || widthIndex > 2) {
+			validMove = false;
+		} else if(this.matrix[heightIndex][widthIndex] == 0) {
+			this.matrix[heightIndex][widthIndex] = value;
+			validMove = true;
+		}
+		return validMove;
+	}
+	
 	private void initializeMatrix() {
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
@@ -57,20 +84,6 @@ public class PerfectMatrix {
 				check = false;
 		}
 		return check;
-	}
-	
-	public void makeMatrix() {
-		this.initializeMatrix();
-		this.fillThreeMatrixIndexs();
-	}
-	
-	public void printMatrix() {
-		for(int i = 0; i < 3; i++) {
-			for(int j = 0; j < 3; j++) {
-				System.out.print(matrix[i][j] + " ");
-			}
-			System.out.println();
-		}
 	}
 	
 }
